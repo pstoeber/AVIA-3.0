@@ -1,0 +1,108 @@
+use strict;
+use warnings;
+use DBI;
+#connecting to cloud RDS instance
+my $dbh = DBI->connect ("dbi:mysql:database=ExpressionDB;host=expressiondb.cosheh3pc1ze.us-east-2.rds.amazonaws.com:3306", "pstoeber", "Sk1ttles",{RaiseError => 1, AutoCommit => 1}); 
+query_tcga($dbh);
+$dbh->disconnect();
+
+sub query_tcga{ #method to query TCGA database for genes associated with tissue type
+    
+    my ($dbh) = @_;
+    my @genes;
+    my $tissue_type;
+    print "Please enter the tissue type to scan for: "; #asking for user input of tissue type
+    chomp(my $input = <STDIN>);
+    
+    if($input eq "breast" or $input eq "breast cancer"){
+        $tissue_type = "breast";
+        $input = "breast cancer";
+    }
+    elsif($input eq "prostate"){
+        $tissue_type = "colon";
+        $input = "prostate cancer";
+    }
+    elsif($input eq "blood"){
+        $tissue_type = "blood";
+        $input = "leukemia";
+    }
+    my $sql = "select distinct gene from tcga_master_table where cancer_type = \"$input\""; #TCGA database query 
+    my $sth = $dbh -> prepare($sql);
+    $sth -> execute();
+    while(my @row = $sth->fetchrow_array()){ #looping through column output 
+        push(@genes, $row[0]); #storing output as array
+    }
+    $sth->finish();
+    query_gtex($dbh, \@genes, $tissue_type);
+}
+
+sub query_gtex{ #method to query GTEx database based on tissue type 
+    
+    my ($dbh) = $_[0];
+    my (@genes) = @{$_[1]}; #genes from TCGA database
+    my ($tissue_type) = $_[2]; #tissue type for user input 
+    my @ids;
+    
+    my $sql = "select sampid from pure_gtex_master_view where smts = \"$tissue_type\""; # query into pure_gtex_master_view extracting sample ID's based on tissue
+    my $sth = $dbh->prepare($sql);
+    $sth->execute();
+    #my $rows = $sth -> dump_results();
+    while(my @row = $sth->fetchrow_array){ #looping through column output 
+        push(@ids, $row[0]); #storing sample ID's as array 
+    }
+    $sth->finish();
+    query_join(\@ids, \@genes, $dbh);
+}
+
+sub query_join{ #method to join sample ID's from pure_gtex_master_view with genetpm1 table
+    
+    my (@ids) = @{$_[0]}; #sample ID's from Gtex database
+    my (@genes) =@{$_[1]}; #genes from TCGA database
+    my ($dbh) = $_[2];
+    
+    my %output; #initializing output hash
+    my $idList = join ', ', map{qq/`$_`/}@ids; #creating string of sample ID's for sql query
+    my $geneList = join ' or substr(name, 1, 15) = ', map{qq/"$_"/}@genes; #creating string of where conditions based on genes 
+    
+    my $query = "select name, $idList from genetpm1 where substr(name, 1, 15) = $geneList"; #querying genetpm1 table 
+    my $sth2 = $dbh->prepare($query);
+    $sth2->execute();
+    #my $rows = $sth2->dump_results( );
+    my @traits;
+    while(my @row = $sth2->fetchrow_array()){ #looping through sql output
+        for(my $i = 0; $i < @row; $i++){ #looping through each row of sql output
+            my $space = "\t";
+            $traits[$i] .= $row[$i].$space  #parsing columns out tpm values based on sample ID
+        }
+    }
+    my @sortedID = split ' ', $traits[0]; #extracting sorted genelist for header of csv file
+    for(my $i = 1; $i < @ids; $i++){ 
+        my @arrayVals = split ' ', $traits[$i]; #splitting string elements of @traits into arrays
+        $output{$ids[$i-1]} = [@arrayVals]; #pushing sample ID as key and tpm1 as values into output hash
+    }
+    output_query(\%output, \@sortedID);
+}
+
+sub output_query{ #method to create output csv file
+    
+    my (%output) = %{$_[0]}; 
+    my (@genes) = @{$_[1]};
+    my $dir = "GTEx_output"; #creating directory name
+    use TEXT::CSV_XS; #calling package TEXT::CSV_XS
+    my $csv = Text::CSV_XS->new( { binary => 1, eol => "\r" } ); #creating $csv object
+    mkdir($dir); 
+    opendir(DIR, $dir) or die "Couldn't open $dir\n";
+    open my $outfile, ">", "$dir/tpm1_output3.csv" or die "Couldn't open output.txt file\n"; #opening file, overriding if already created
+    
+    my $genesRef = \@genes; #creating array reference of @genes
+    $csv -> print ($outfile, $genesRef); #printing @genes as header 
+    for(keys %output){
+        my @value = @{$output{$_}}; #extracting tpm value array
+        my $valueRef = \@value; #creating array refernce
+        $csv -> print($outfile, $valueRef); #printing array across row
+        print $outfile "\n";
+    }
+    print "success, application has completed!\n";
+    close(DIR);
+    close($outfile);
+}
