@@ -1,0 +1,757 @@
+Philip$ mysql -u root -p
+
+
+create database TCGA;
+
+USE TCGA;
+
+/* creating data_mutations table */
+
+create table data_mutations_prostate(HUGO_SYMBOL VARCHAR(10), ENTREZ_GENE_ID INT, CENTER VARCHAR(20), NCBI_BUILD VARCHAR(10), CHROMOSOME VARCHAR(2), START_POSITION INT, END_POSITION INT, STRAND INT, VARIANT_CLASSIFICATION VARCHAR(10), VARIANT_TYPE VARCHAR(10), REFERENCE_ALLELE VARCHAR(10), TUMOR_SEQ_ALLELLE1 VARCHAR(10), TUMOR_SEQ_ALLELE2 VARCHAR(10), dbSNP_RS VARCHAR(10), dbSNP_VAL_STATUS VARCHAR(50),
+TUMOR_SAMPLE_BARCODE VARCHAR(20), MATCHED_NORM_SAMPLE_BARCODE VARCHAR(20), MATCH_NORM_SEQ_ALLELE1 VARCHAR(10), MATCH_NORM_SEQ_ALLELE2 VARCHAR(10),TUMOR_VALIDATION_ALLELE1 VARCHAR(50), TUMOR_VALIDATION_ALLELE2 VARCHAR(50), MATCH_NORM_VALIDATION_ALLELE1 VARCHAR(50), MATCH_NORM_VALIDATION_ALLELE2 VARCHAR(50), VERIFICATION_STATUS VARCHAR(50), Validation_Status VARCHAR(50), Mutation_Status VARCHAR(50), Sequencing_Phase VARCHAR(50), Sequence_Source VARCHAR(50), Validation_Method VARCHAR(50), SCORE VARCHAR(50), BAM_FILE VARCHAR(100), SEQUENCER VARCHAR(100), `MA:FImpact` VARCHAR(50), `MA:FIS` VARCHAR(50), `MA:protein.change` VARCHAR(50), `MA:link.MSA` VARCHAR(50), `MA:link.PDB` VARCHAR(50), `MA:link.var` VARCHAR(50), Tumor_Sample_UUID VARCHAR(50), Matched_Norm_Sample_UUID VARCHAR(50), HGVSc VARCHAR(20), HGVSp VARCHAR(20), HGVSp_SHORT VARCHAR(20), TRANSCRIPT_ID VARCHAR(30), EXON_NUMBER VARCHAR(50), t_DEPTH INT, t_REF_COUNT INT, t_ALT_COUNT INT, n_DEPTH INT, n_REF_COUNT INT, n_ALT_COUNT INT, ALL_EFFECTS VARCHAR(500), ALLELE VARCHAR(20), GENE VARCHAR(30), FEATURE VARCHAR(30), FEATURE_TYPE VARCHAR(20), CONSEQUENCE VARCHAR(20), cDNA_POSITION VARCHAR(40), 
+CDS_POSITION VARCHAR(40), PROTEIN_POSITION VARCHAR(40), AMINO_ACIDS VARCHAR(20), CODONS VARCHAR(20), EXISTING_VARIATION VARCHAR(100), ALLELE_NUM INTEGER, DISTANCE VARCHAR(20), SYMBOL VARCHAR(20), SYMBOL_SOURCE VARCHAR(20), HGNC_ID INT, BIOTYPE VARCHAR(30), CANONICAL VARCHAR(20), CCDS VARCHAR(100), ENSP VARCHAR(50), SWISSPROT VARCHAR(50), TREMBL VARCHAR(50), UNIPARC VARCHAR(30), REFSEQ VARCHAR(20), SIFT VARCHAR(50), POLYPHEN VARCHAR(50), EXON VARCHAR(50), INTRONS VARCHAR(50), DOMAINS VARCHAR(1000), GMAF VARCHAR(20), AFR_MAF VARCHAR(20), AMR_MAF VARCHAR(20), ASN_MAF VARCHAR(20), EAS_MAF VARCHAR(20), EUR_MAF VARCHAR(20), SAS_MAF VARCHAR(20), AA_MAF  VARCHAR(20), EA_MAF  VARCHAR(20), CLIN_SIG VARCHAR(20), SOMATIC VARCHAR(20),
+PUBMED VARCHAR(20), MOTIF_NAME VARCHAR(20), MOTIF_POS VARCHAR(20), HIGH_INF_POS VARCHAR(20), MOTIF_SCORE_CHANGE VARCHAR(50), IMPACT VARCHAR(20), PICK VARCHAR(20), VARIANT_CLASS VARCHAR(20), TSL VARCHAR(20), HGVS_OFFSET VARCHAR(20), PHENO VARCHAR(20), MINIMISED VARCHAR(20), ExAC_AF VARCHAR(20), ExAC_AF_AFR VARCHAR(20), ExAC_AF_AMR VARCHAR(20), ExAC_AF_EAS VARCHAR(20), ExAC_AF_FIN VARCHAR(20), ExAC_AF_NFE VARCHAR(20), ExAC_AF_OTH VARCHAR(20), ExAC_AF_SAS VARCHAR(20), GENE_PHENO VARCHAR(20), FILTER VARCHAR(20), amino_acid_change VARCHAR(20), forigv VARCHAR(50), tumor_rna VARCHAR(20), organd_rna VARCHAR(20), tumor_depth VARCHAR(20), tumor_vaf VARCHAR(20), normal_depth VARCHAR(20), normal_vaf VARCHAR(20), ONCOTATOR_COSMIC_OVERLAPPING VARCHAR(20), ONCOTATOR_DBSNP_RS VARCHAR(20), ONCOTATOR_DBSNP_VAL_STATUS VARCHAR(20), ONCOTATOR_VARIANT_CLASSIFICATION VARCHAR(20), ONCOTATOR_PROTEIN_CHANGE VARCHAR(20), ONCOTATOR_GENE_SYMBOL VARCHAR(20), ONCOTATOR_REFSEQ_MRNA_ID VARCHAR(20), ONCOTATOR_REFSEQ_PROT_ID VARCHAR(20), ONCOTATOR_UNIPROT_ENTRY_NAME VARCHAR(20), ONCOTATOR_UNIPROT_ACCESSION VARCHAR(20), ONCOTATOR_CODON_CHANGE VARCHAR(20), ONCOTATOR_TRANSCRIPT_CHANGE VARCHAR(20), ONCOTATOR_EXON_AFFECTED VARCHAR(20), ONCOTATOR_PROTEIN_POS_START VARCHAR(20),
+ONCOTATOR_PROTEIN_POS_END VARCHAR(20), ONCOTATOR_VARIANT_CLASSIFICATION_BEST_EFFECT VARCHAR(20), ONCOTATOR_PROTEIN_CHANGE_BEST_EFFECT VARCHAR(20), ONCOTATOR_GENE_SYMBOL_BEST_EFFECT VARCHAR(20), ONCOTATOR_REFSEQ_MRNA_ID_BEST_EFFECT VARCHAR(20), ONCOTATOR_REFSEQ_PROT_ID_BEST_EFFECT VARCHAR(20), ONCOTATOR_UNIPROT_ENTRY_NAME_BEST_EFFECT VARCHAR(20), ONCOTATOR_UNIPROT_ACCESSION_BEST_EFFECT VARCHAR(20), ONCOTATOR_CODON_CHANGE_BEST_EFFECT VARCHAR(20), ONCOTATOR_TRANSCRIPT_CHANGE_BEST_EFFECT VARCHAR(20), ONCOTATOR_EXON_AFFECTED_BEST_EFFECT VARCHAR(20), ONCOTATOR_PROTEIN_POS_START_BEST_EFFECT VARCHAR(20), ONCOTATOR_PROTEIN_POS_END_BEST_EFFECT VARCHAR(20), forIGV_2 VARCHAR(20), Tumor_RNA_2 VARCHAR(20), Organd_RNA_2 VARCHAR(20));
+
+/* altering data_mutations table */
+
+alter table data_mutations_prostate modify column ALLELE_NUM  varchar(50);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN HGNC_ID VARCHAR(50);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN BIOTYPE VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN ExAC_AF VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN ExAC_AF_AFR VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN ExAC_AF_FIN VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN ExAC_AF_NFE VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN ExAC_AF_OTH VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN VARIANT_CLASSIFICATION VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN `MA:link.MSA` VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN `MA:link.PDB` VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN `MA:link.var` VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN ALL_EFFECTS VARCHAR(6000);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN TREMBL VARCHAR(6000);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN REFSEQ VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN CONSEQUENCE VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN SYMBOL_SOURCE VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN TUMOR_SEQ_ALLELLE1 VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN TUMOR_SEQ_ALLELE2 VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN HGVSc VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN HGVSp VARCHAR(100);
+ALTER TABLE data_mutations_prostate MODIFY COLUMN GMAF VARCHAR(100);
+/*alter table data_mutations modify HUGo_SYMBOL varchar(50);*/
+
+/* creating data_clinical table */
+
+create table data_clinical_prostate(PATIENT_ID VARCHAR(20), SAMPLE_ID VARCHAR(20), TISSUE_SITE VARCHAR(100), DOUBLING_TIME_DAYS VARCHAR(20), PRIOR_THERAPY VARCHAR(50), STUDIES VARCHAR(50), KPS VARCHAR(20), `HGB_(g/dL)` VARCHAR(20), `ALB_(g/dL)` VARCHAR(20),`PSA_(ng/DL)` VARCHAR(20), `ALP_(U/L)` VARCHAR(20), `LDH_(U/L)` VARCHAR(20), CANCER_TYPE VARCHAR(50), CANCER_TYPE_DETAILED VARCHAR(50));
+
+
+
+/* creating table data_clinical_leukemia */
+
+create table data_clinical_leukemia(SAMPLE_ID VARCHAR(50),
+     PATIENT_ID VARCHAR(50),
+     SEX VARCHAR(10),
+     RACE VARCHAR(20),
+     FAB VARCHAR(20),
+     AGE VARCHAR(20),
+     BM_BLAST_PERCENTAGE INT,
+     WBC FLOAT,
+     PB_BLAST_PERCENTAGE INT,
+     AML_IN_SKIN_PERCENTAGE VARCHAR(20),
+     SUBCLONES VARCHAR(20),
+     CYTOGENETICS VARCHAR(200),
+     INFERRED_GENOMIC_REARRANGEMENT VARCHAR(1000),
+     CYTOGENETIC_CODE_OTHER VARCHAR(100),
+     `RISK_(CYTO)` VARCHAR(20),
+     HISTOLOGICAL_SUBTYPE VARCHAR(100),
+     RISK_MOLECULAR VARCHAR(20),
+     STRUCTURAL_VARIANTS VARCHAR(26000),
+     DFS_MONTHS VARCHAR(20),
+     DFS_STATUS VARCHAR(200),
+     INDUCTION VARCHAR(50),
+     TRANSPLANT_TYPE VARCHAR(10),
+     DARK_ZONE_STAT VARCHAR(20),
+     OS_MONTHS FLOAT,
+     OS_STATUS VARCHAR(50),
+     CANCER_TYPE VARCHAR(50),
+     CANCER_TYPE_DETAILED VARCHAR(50));
+
+
+/* creating table data_mutations_leukemia */
+
+create table data_mutations_leukemia(Hugo_Symbol varchar(20),
+	Entrez_Gene_Id varchar(10),
+	Center varchar(50),
+	NCBI_Build varchar(50),
+	Chromosome varchar(50),
+	Start_Position int,
+	End_Position int,
+	Strand int,
+	Variant_Classification varchar(50),
+	Variant_Type varchar(50),
+	Reference_Allele varchar(100),
+	Tumor_Seq_Allele1 varchar(1000),
+	Tumor_Seq_Allele2 varchar(3000),
+	dbSNP_RS varchar(100),
+	dbSNP_Val_Status varchar(100),
+	Tumor_Sample_Barcode varchar(100),
+	Matched_Norm_Sample_Barcode varchar(100),
+	Match_Norm_Seq_Allele1 varchar(100),
+	Match_Norm_Seq_Allele2 varchar(100),
+	Tumor_Validation_Allele1 varchar(100),
+	Tumor_Validation_Allele2 varchar(100),
+	Match_Norm_Validation_Allele1 varchar(100),
+	Match_Norm_Validation_Allele2 varchar(100),
+	Verification_Status varchar(100),
+	Validation_Status varchar(100),
+	Mutation_Status	 varchar(100),
+	Sequencing_Phase varchar(100),
+	Sequence_Source varchar(100),
+	Validation_Method varchar(100),
+	Score varchar(100),
+	BAM_File varchar(100),
+	Sequencer varchar(100),
+	`MA:FImpact` varchar(100),
+	`MA:FIS` varchar(100),
+	`MA:protein.change` varchar(100),
+	`MA:link.MSA` varchar(1000),
+	`MA:link.PDB` varchar(1000),
+	`MA:link.var` varchar(1000),
+	Tumor_Sample_UUID varchar(1000),
+	Matched_Norm_Sample_UUID varchar(1000),
+	HGVSc varchar(4000),
+	HGVSp varchar(1000),
+	HGVSp_Short varchar(1000),
+	Transcript_ID varchar(100),
+	Exon_Number varchar(100),
+	t_depth varchar(50),
+	t_ref_count varchar(50),
+	t_alt_count varchar(50),
+	n_depth varchar(50),
+	n_ref_count varchar(50),
+	n_alt_count varchar(50),
+	all_effects varchar(6000),
+	Allele varchar(1000),
+	Gene varchar(100),
+	Feature	Feature_type varchar(50),
+	Consequence varchar(100),
+	cDNA_position varchar(50),
+	CDS_position varchar(50),
+	Protein_position varchar(50),
+	Amino_acids varchar(100),
+	Codons varchar(1000),
+	Existing_variation varchar(1000),
+	ALLELE_NUM varchar(1000),
+	DISTANCE varchar(50),
+	SYMBOL varchar(50),
+	SYMBOL_SOURCE varchar(100),
+	HGNC_ID varchar(100),
+	BIOTYPE varchar(100),	
+	CANONICAL varchar(50),
+	CCDS varchar(50),
+	ENSP varchar(50),
+	SWISSPROT varchar(500),
+	TREMBL blob,
+	UNIPARC	varchar(50),
+	RefSeq varchar(300),
+	SIFT varchar(100),
+	PolyPhen  varchar(100),
+	EXON varchar(50),
+	INTRON varchar(10),
+	DOMAINS blob,
+	GMAF varchar(100),
+	AFR_MAF	varchar(100),
+	AMR_MAF varchar(100),
+	ASN_MAF varchar(100),
+	EAS_MAF varchar(100),
+	EUR_MAF varchar(100),
+	SAS_MAF varchar(100),
+	AA_MAF varchar(100),
+	EA_MAF varchar(100),
+	CLIN_SIG varchar(100),
+	SOMATIC	varchar(100),
+	PUBMED varchar(1000),
+	MOTIF_NAME varchar(100),
+	MOTIF_POS varchar(100),
+	HIGH_INF_POS varchar(100),
+	MOTIF_SCORE_CHANGE varchar(100),
+	IMPACT varchar(100),
+	PICK int,
+	VARIANT_CLASS varchar(100),
+	TSL varchar(10),
+	HGVS_OFFSET varchar(100),
+	PHENO varchar(100),
+	MINIMISED int,
+	ExAC_AF int,
+	ExAC_AF_AFR int,
+	ExAC_AF_AMR int,
+	ExAC_AF_EAS int,
+	ExAC_AF_FIN int,
+	ExAC_AF_NFE int,
+	ExAC_AF_OTH int,
+	ExAC_AF_SAS int,
+	GENE_PHENO int,
+	FILTER varchar(50),
+	chromosome_name	start int,
+	stop int,
+	reference int,
+	variant varchar(6000),
+	type varchar(10),
+	gene_name varchar(50),
+	transcript_name varchar(50),
+	transcript_species varchar(50),
+	transcript_source varchar(50),
+	transcript_version varchar(50),
+	transcript_status varchar(50),
+	trv_type varchar(50),
+	c_position varchar(50),
+	amino_acid_change varchar(500),
+	ucsc_cons varchar(500),
+	domain varchar(5000),
+	all_domains varchar(6000),
+	deletion_substructures varchar(10),
+	transcript_error varchar(1000),
+	normalrefreads_wu varchar(50),
+	normalvarreads_wu varchar(50),
+	normalvaf_wu varchar(50),
+	tumorrefreads_wu varchar(50),
+	tumorvarreads_wu varchar(50),
+	tumorvaf_wu varchar(50),
+	rnarefreads_wu varchar(50),
+	rnavarreads_wu varchar(50),
+	rnavaf_wu varchar(50),
+	ONCOTATOR_COSMIC_OVERLAPPING blob,
+	ONCOTATOR_DBSNP_RS blob,
+	ONCOTATOR_DBSNP_VAL_STATUS blob,
+	ONCOTATOR_VARIANT_CLASSIFICATION blob,
+	ONCOTATOR_PROTEIN_CHANGE blob,
+	ONCOTATOR_GENE_SYMBOL blob,
+	ONCOTATOR_REFSEQ_MRNA_ID blob,
+	ONCOTATOR_REFSEQ_PROT_ID blob,
+	ONCOTATOR_UNIPROT_ENTRY_NAME blob,
+	ONCOTATOR_UNIPROT_ACCESSION blob,
+	ONCOTATOR_CODON_CHANGE	ONCOTATOR_TRANSCRIPT_CHANGE blob,
+	ONCOTATOR_EXON_AFFECTED blob,
+	ONCOTATOR_PROTEIN_POS_START blob,
+	ONCOTATOR_PROTEIN_POS_END blob,
+	ONCOTATOR_VARIANT_CLASSIFICATION_BEST_EFFECT blob,
+	ONCOTATOR_PROTEIN_CHANGE_BEST_EFFECT blob,
+	ONCOTATOR_GENE_SYMBOL_BEST_EFFECT blob,
+	ONCOTATOR_REFSEQ_MRNA_ID_BEST_EFFECT blob,
+	ONCOTATOR_REFSEQ_PROT_ID_BEST_EFFECT blob,
+	ONCOTATOR_UNIPROT_ENTRY_NAME_BEST_EFFECT blob,
+	ONCOTATOR_UNIPROT_ACCESSION_BEST_EFFECT blob,
+	ONCOTATOR_CODON_CHANGE_BEST_EFFECT blob,
+	ONCOTATOR_TRANSCRIPT_CHANGE_BEST_EFFECT blob,
+	ONCOTATOR_EXON_AFFECTED_BEST_EFFECT blob,
+	ONCOTATOR_PROTEIN_POS_START_BEST_EFFECT blob,
+	ONCOTATOR_PROTEIN_POS_END_BEST_EFFECT blob,
+	NormalRefReads_WU_2 varchar(100),
+	NormalVarReads_WU_2 varchar(100),
+	NormalVAF_WU_2 varchar(100),
+	TumorRefReads_WU_2 varchar(100),
+	TumorVarReads_WU_2 varchar(100),
+	TumorVAF_WU_2 varchar(100),
+	RNARefReads_WU_2 varchar(100),
+	RNAVarReads_WU_2 varchar(100),
+	RNAVAF_WU_2 varchar(100)
+	);
+
+/* creating data_clinical_breast_cancer */
+
+create table data_clinical_breast_cancer(SAMPLE_ID varchar(100),
+	PATIENT_ID varchar(100),
+	Gender varchar(100),
+	AGE varchar(100),
+	ER_Status varchar(100),
+	PR_Status varchar(100),
+	HER2_Final_Status varchar(100),
+	Tumor varchar(100),
+	`Tumor--T1 Coded` varchar(100),
+	Node varchar(100),
+	Node_Coded varchar(100),
+	Metastasis varchar(100),
+	Metastasis_Coded varchar(100),
+	AJCC_Stage varchar(100),
+	Converted_Stage varchar(100),
+	Survival_Data_Form varchar(100),
+	OS_STATUS varchar(100),
+	OS_MONTHS varchar(100),
+	PAM50_Subtype varchar(100),
+	SigClust_Unsupervised_mRNA varchar(100),
+	SigClust_Intrinsic_mRNA varchar(100),
+	miRNA_Clusters varchar(100),
+	methylation_Clusters varchar(100),
+	RPPA_Clusters varchar(100),
+	CN_Clusters varchar(100),
+	`Integrated_Clusters (with PAM50)` varchar(100),
+	`Integrated_Clusters (no exp)` varchar(100),
+	`Integrated_Clusters (unsup exp)` varchar(100),
+	CANCER_TYPE varchar(100),
+	CANCER_TYPE_DETAILED varchar(100)
+	);
+
+/* creating data_mutations_breast_cancer */
+
+create table data_mutations_breast_cancer(Hugo_Symbol varchar(20),
+	Entrez_Gene_Id varchar(20),
+	Center varchar(20),
+	NCBI_Build varchar(20),
+	Chromosome varchar(20),
+	Start_Position int,
+	End_Position int, 
+	Strand varchar(20),
+	Variant_Classification varchar(20),
+	Variant_Type varchar(20),
+	Reference_Allele varchar(20),
+	Tumor_Seq_Allele1 varchar(20),
+	Tumor_Seq_Allele2 varchar(20),
+	dbSNP_RS varchar(20),
+	dbSNP_Val_Status varchar(100),
+	Tumor_Sample_Barcode varchar(100),
+	Matched_Norm_Sample_Barcode varchar(100),
+	Match_Norm_Seq_Allele1 varchar(20),
+	Match_Norm_Seq_Allele2 varchar(20),
+	Tumor_Validation_Allele1 varchar(20),
+	Tumor_Validation_Allele2 varchar(20),
+	Match_Norm_Validation_Allele1 varchar(20),
+	Match_Norm_Validation_Allele2 varchar(20),
+	Verification_Status varchar(50),
+	Validation_Status varchar(50),
+	Mutation_Status varchar(50),
+	Sequencing_Phase varchar(50),
+	Sequence_Source varchar(50),
+	Validation_Method varchar(50),
+	Score varchar(50),
+	BAM_File varchar(50),
+	Sequencer varchar(50),
+	`MA:FImpact` varchar(50),
+	`MA:FIS` varchar(50),
+	`MA:protein.change` varchar(50),
+	`MA:link.MSA` varchar(50),
+	`MA:link.PDB` varchar(50),
+	`MA:link.var` varchar(50),
+	Tumor_Sample_UUID varchar(100),
+	Matched_Norm_Sample_UUID varchar(100),
+	HGVSc varchar(100),
+	HGVSp varchar(100),
+	HGVSp_Short varchar(100),
+	Transcript_ID varchar(100),
+	Exon_Number varchar(100),
+	t_depth varchar(20),
+	t_ref_count varchar(20),
+	t_alt_count varchar(20),
+	n_depth varchar(20),
+	n_ref_count varchar(20),
+	n_alt_count varchar(20),
+	all_effects varchar(100),
+	Allele varchar(100),
+	Gene varchar(100),
+	Feature varchar(100),
+	Feature_type varchar(100),
+	Consequence varchar(100),
+	cDNA_position varchar(100),
+	CDS_position varchar(100),
+	Protein_position varchar(100),
+	Amino_acids varchar(100),
+	Codons varchar(100),
+	Existing_variation varchar(100),
+	ALLELE_NUM varchar(100),
+	DISTANCE varchar(10),
+	SYMBOL varchar(100),
+	SYMBOL_SOURCE varchar(100),
+	HGNC_ID varchar(100),
+	BIOTYPE varchar(100),
+	CANONICAL varchar(100),
+	CCDS varchar(100),
+	ENSP varchar(100),
+	SWISSPROT varchar(1000),
+	TREMBL blob,
+	UNIPARC varchar(100),
+	RefSeq varchar(100),
+	SIFT varchar(100),
+	PolyPhen varchar(100),
+	EXON varchar(100),
+	INTRON varchar(100),
+	DOMAINS blob,
+	GMAF varchar(100),
+	AFR_MAF varchar(100),
+	AMR_MAF varchar(100),
+	ASN_MAF varchar(100),
+	EAS_MAF varchar(100),
+	EUR_MAF varchar(100),
+	SAS_MAF varchar(100),
+	AA_MAF varchar(100),
+	EA_MAF varchar(100),
+	CLIN_SIG varchar(100),
+	SOMATIC varchar(100),
+	PUBMED varchar(100),
+	MOTIF_NAME varchar(100),
+	MOTIF_POS varchar(100),
+	HIGH_INF_POS varchar(100),
+	MOTIF_SCORE_CHANGE varchar(100),
+	IMPACT varchar(100),
+	PICK varchar(100),
+	VARIANT_CLASS varchar(100),
+	TSL varchar(100),
+	HGVS_OFFSET varchar(100),
+	PHENO varchar(100),
+	MINIMISED varchar(100),
+	ExAC_AF varchar(100),
+	ExAC_AF_AFR varchar(100),
+	ExAC_AF_AMR varchar(100),
+	ExAC_AF_EAS varchar(100),
+	ExAC_AF_FIN varchar(100),
+	ExAC_AF_NFE varchar(100),
+	ExAC_AF_OTH varchar(100),
+	ExAC_AF_SAS varchar(100),
+	GENE_PHENO varchar(100),
+	FILTER varchar(100),
+	chromosome_name_wu varchar(100),
+	start_wu varchar(100),
+	stop_wu varchar(100),
+	reference_wu varchar(10),
+	variant_wu varchar(10),
+	type_wu varchar(100),
+	gene_name_wu varchar(100),
+	transcript_name_wu varchar(100),
+	transcript_species_wu varchar(100),
+	transcript_source_wu varchar(100),
+	transcript_version_wu varchar(100),
+	strand_wu varchar(100),
+	transcript_status_wu varchar(100),
+	trv_type_wu varchar(100),
+	c_position_wu varchar(100),
+	amino_acid_change_wu varchar(100),
+	ucsc_cons_wu varchar(100),
+	domain_wu varchar(100),
+	all_domains_wu varchar(100),
+	deletion_substructures_wu varchar(10),
+	annotation_errors_wu varchar(100),
+	ONCOTATOR_COSMIC_OVERLAPPING blob,
+	ONCOTATOR_DBSNP_RS blob,
+	ONCOTATOR_DBSNP_VAL_STATUS blob,
+	ONCOTATOR_VARIANT_CLASSIFICATION blob,
+	ONCOTATOR_PROTEIN_CHANGE blob,
+	ONCOTATOR_GENE_SYMBOL blob,
+	ONCOTATOR_REFSEQ_MRNA_ID blob,
+	ONCOTATOR_REFSEQ_PROT_ID blob,
+	ONCOTATOR_UNIPROT_ENTRY_NAME blob,
+	ONCOTATOR_UNIPROT_ACCESSION blob,
+	ONCOTATOR_CODON_CHANGE blob,
+	ONCOTATOR_TRANSCRIPT_CHANGE blob,
+	ONCOTATOR_EXON_AFFECTED blob,
+	ONCOTATOR_PROTEIN_POS_START blob,
+	ONCOTATOR_PROTEIN_POS_END blob,
+	ONCOTATOR_VARIANT_CLASSIFICATION_BEST_EFFECT blob,
+	ONCOTATOR_PROTEIN_CHANGE_BEST_EFFECT blob,
+	ONCOTATOR_GENE_SYMBOL_BEST_EFFECT blob,
+	ONCOTATOR_REFSEQ_MRNA_ID_BEST_EFFECT blob,
+	ONCOTATOR_REFSEQ_PROT_ID_BEST_EFFECT blob,
+	ONCOTATOR_UNIPROT_ENTRY_NAME_BEST_EFFECT blob,
+	ONCOTATOR_UNIPROT_ACCESSION_BEST_EFFECT blob,
+	ONCOTATOR_CODON_CHANGE_BEST_EFFECT blob,
+	ONCOTATOR_TRANSCRIPT_CHANGE_BEST_EFFECT blob,
+	ONCOTATOR_EXON_AFFECTED_BEST_EFFECT blob,
+	ONCOTATOR_PROTEIN_POS_START_BEST_EFFECT blob,
+	ONCOTATOR_PROTEIN_POS_END_BEST_EFFECT blob,
+	chromosome_name_WU_2 varchar(100),
+	start_WU_2 varchar(100),
+	stop_WU_2 varchar(100),	
+	reference_WU_2 varchar(100),
+	variant_WU_2 varchar(100),
+	type_WU_2 varchar(100),
+	gene_name_WU_2 varchar(100),
+	transcript_name_WU_2 varchar(100),
+	transcript_species_WU_2 varchar(100),
+	transcript_source_WU_2 varchar(100),
+	transcript_version_WU_2 varchar(100),
+	strand_WU_2 varchar(100),
+	transcript_status_WU_2 varchar(100),
+	trv_type_WU_2 varchar(100),
+	c_position_WU_2 varchar(100),
+	amino_acid_change_WU_2 varchar(100),
+	ucsc_cons_WU_2 varchar(100),
+	domain_WU_2 varchar(100),
+	all_domains_WU_2 varchar(100),
+	deletion_substructures_WU_2 varchar(100),
+	annotation_errors_WU_2 varchar(100)
+	);
+
+/* creating table data_clinical_carcinoma */
+
+create table data_clinical_carcinoma(SAMPLE_ID varchar(50),
+	PATIENT_ID varchar(50),
+	HPV_STATUS varchar(50),
+	PRIMARY_SITE varchar(50),
+	OS_STATUS varchar(50),
+	OS_MONTHS varchar(50),
+	CANCER_TYPE varchar(50),
+	CANCER_TYPE_DETAILED varchar(50)
+	);
+
+/* creating table data_mutations_carcinoma */
+
+create table data_mutations_carcinoma(Hugo_Symbol varchar(50),
+	Entrez_Gene_Id varchar(10),
+	Center varchar(10),
+	NCBI_Build varchar(50),
+	Chromosome varchar(50),
+	Start_Position int,
+	End_Position int,
+	Strand varchar(10),
+	Variant_Classification varchar(50),
+	Variant_Type varchar(50),
+	Reference_Allele varchar(500),
+	Tumor_Seq_Allele1 varchar(50),
+	Tumor_Seq_Allele2 varchar(50),
+	dbSNP_RS blob,
+	dbSNP_Val_Status varchar(200),
+	Tumor_Sample_Barcode varchar(100),
+	Matched_Norm_Sample_Barcode varchar(100),
+	Match_Norm_Seq_Allele1 blob,
+	Match_Norm_Seq_Allele2 blob,
+	Tumor_Validation_Allele1 blob,
+	Tumor_Validation_Allele2 blob,
+	Match_Norm_Validation_Allele1 blob,
+	Match_Norm_Validation_Allele2 blob,
+	Verification_Status blob,
+	Validation_Status blob,
+	Mutation_Status blob,
+	Sequencing_Phase blob,
+	Sequence_Source blob,
+	Validation_Method blob,
+	Score blob,
+	BAM_File blob,
+	Sequencer blob,
+	`MA:FImpact` blob,
+	`MA:FIS` blob,
+	`MA:protein.change` blob,
+	`MA:link.MSA` blob,
+	`MA:link.PDB` blob,
+	`MA:link.var` blob,
+	Tumor_Sample_UUID varchar(100),
+	Matched_Norm_Sample_UUID varchar(100),
+	HGVSc blob,
+	HGVSp blob,
+	HGVSp_Short blob,
+	Transcript_ID varchar(100),
+	Exon_Number blob,
+	t_depth blob,
+	t_ref_count blob,
+	t_alt_count blob,
+	n_depth blob,
+	n_ref_count blob,
+	n_alt_count blob,
+	all_effects blob,
+	Allele varchar(100),
+	Gene varchar(100),
+	Feature blob,
+	Feature_type blob,
+	Consequence blob,
+	cDNA_position blob,
+	CDS_position blob,
+	Protein_position blob,
+	Amino_acids blob,
+	Codons blob,
+	Existing_variation blob,
+	ALLELE_NUM blob,
+	DISTANCE blob,
+	SYMBOL blob,
+	SYMBOL_SOURCE blob,
+	HGNC_ID blob,
+	BIOTYPE varchar(100),
+	CANONICAL blob,
+	CCDS blob,
+	ENSP blob,
+	SWISSPROT blob,
+	TREMBL blob,
+	UNIPARC blob,
+	RefSeq blob,
+	SIFT blob,
+	PolyPhen blob,
+	EXON blob,
+	INTRON blob,
+	DOMAINS blob,
+	GMAF blob,
+	AFR_MAF blob,
+	AMR_MAF blob,
+	ASN_MAF blob,
+	EAS_MAF blob,
+	EUR_MAF blob,
+	SAS_MAF blob,
+	AA_MAF blob,
+	EA_MAF blob,
+	CLIN_SIG blob,
+	SOMATIC blob,
+	PUBMED varchar(100),
+	MOTIF_NAME blob,
+	MOTIF_POS blob,
+	HIGH_INF_POS blob,
+	MOTIF_SCORE_CHANGE blob,
+	IMPACT varchar(100),
+	PICK blob,
+	VARIANT_CLASS varchar(100),
+	TSL blob,
+	HGVS_OFFSET blob,
+	PHENO blob,
+	MINIMISED blob,
+	ExAC_AF blob,
+	ExAC_AF_AFR blob,
+	ExAC_AF_AMR blob,
+	ExAC_AF_EAS blob,
+	ExAC_AF_FIN blob,
+	ExAC_AF_NFE blob,
+	ExAC_AF_OTH blob,
+	ExAC_AF_SAS blob,
+	GENE_PHENO blob,
+	FILTER blob,
+	genome_change blob,
+	annotation_transcript blob,
+	transcript_strand blob,
+	transcript_exon blob,
+	transcript_position blob,
+	cdna_change blob,
+	codon_change varchar(1000),
+	protein_change varchar(100),
+	other_transcripts blob,
+	refseq_mrna_id varchar(100),
+	refseq_prot_id varchar(100),
+	swissprot_acc_id varchar(100),
+	swissprot_entry_id varchar(100),
+	description blob,
+	uniprot_aapos blob,
+	uniprot_region blob,
+	uniprot_site blob,
+	uniprot_natural_variations blob,
+	uniprot_experimental_info blob,
+	go_biological_process blob,
+	go_cellular_component blob,
+	go_molecular_function blob,
+	cosmic_overlapping_mutations blob,
+	cosmic_fusion_genes blob,
+	cosmic_tissue_types_affected blob,
+	cosmic_total_alterations_in_gene varchar(100),
+	tumorscape_amplification_peaks blob,
+	tumorscape_deletion_peaks blob,
+	tcgascape_amplification_peaks blob,
+	tcgascape_deletion_peaks blob,
+	drugbank blob,
+	ref_context varchar(1000),
+	gc_content varchar(100),
+	cgc_mutation_type blob,
+	cgc_translocation_partner blob,
+	cgc_tumor_types_somatic blob,
+	cgc_tumor_types_germline blob,
+	cgc_other_diseases blob,
+	dnarepairgenes_role blob,
+	familialcancerdatabase_syndromes blob,
+	mutsig_published_results blob,
+	oreganno_id blob,
+	oreganno_values blob,
+	patient varchar(200)
+	);
+
+
+/* loading data into tables */
+
+/* DATA_CLINICAL USE ME */
+load data local infile '/Users/Philip/Desktop/data_clinical.csv' replace into table data_clinical_prostate fields terminated by ',' lines terminated by '\r';
+
+/* DATA_MUTATIONS USE ME IMPORT */
+load data local infile '/Users/Philip/Documents/BTMN 670/Sample data2/data_mutations_prostate.csv' into table data_mutations_prostate fields terminated by ',' lines terminated by '\r' ignore 2 lines;
+
+/* importing data_clinical_leukemia */
+
+load data local infile '/Users/Philip/Documents/BTMN 670/Sample data/data_clinical_leukemia.csv' into table data_clinical_leukemia fields terminated by ',' lines terminated by '\r' ignore 6 lines;
+
+/* importing data_mutations_leukemia */
+
+load data local infile '/Users/Philip/Documents/BTMN 670/Sample data2/data_mutations_leukemia.csv' into table data_mutations_leukemia fields terminated by ',' lines terminated by '\r' ignore 2 lines;
+
+/* importing data_clinical_breast_cancer */
+
+load data local infile '/Users/Philip/Documents/BTMN 670/Sample data/data_clinical_breast_cancer.csv' into table data_clinical_breast_cancer fields terminated by ',' lines terminated by '\r' ignore 6 lines;
+
+/* importing data_mutations_breast_cancer */
+
+load data local infile '/Users/Philip/Documents/BTMN 670/Sample data2/data_mutations_breast_cancer.csv' into table data_mutations_breast_cancer fields terminated by ',' lines terminated by '\r' ignore 2 lines;
+
+/* importing data_clinical_carcinoma *
+
+load data local infile '/Users/Philip/Documents/BTMN 670/Sample data/data_clinical_Carcinoma.csv' into table data_clinical_carcinoma fields terminated by ',' lines terminated by '\r' ignore 6 lines;
+
+/* importing data_mutations_carcinoma *
+
+load data local infile '/Users/Philip/Documents/BTMN 670/Sample data2/data_mutations_carcinoma.csv' into table data_mutations_carcinoma fields terminated by ',' lines terminated by '\r' ignore 2 lines;
+
+/Users/Philip/Documents/BTMN 670/Sample data/data_mutation_carcinoma.csv
+
+/* importing into data_mutations */
+
+load data local infile '/Users/Philip/Documents/BTMN 670/Sample data/CSV files/master_mutationsCSV.csv' into table data_mutations fields terminated by ',' lines terminated by '\r' ignore 2 lines;
+
+/*importing purified data into genetpm1 table */
+
+load data local infile '/Users/Philip/Documents/BTMN 670/Purified GTEx tpm1 data/Pure_Data.txt' into table genetpm1 fields terminated by '\t' lines terminated by '\n' ignore 1 lines;
+
+/* creating tcga_master_view */
+
+create or replace view tcga_master_view as
+select data_clinical_carcinoma.sample_id, data_clinical_carcinoma.patient_id, data_mutations_carcinoma.hugo_symbol, data_mutations_carcinoma.gene, data_mutations_carcinoma.transcript_id, data_clinical_carcinoma.cancer_type
+	from data_clinical_carcinoma
+	join data_mutations_carcinoma on data_mutations_carcinoma.tumor_sample_barcode = data_clinical_carcinoma.sample_id
+
+union
+
+select data_clinical_breast_cancer.sample_id, data_clinical_breast_cancer.patient_id, data_mutations_breast_cancer.hugo_symbol, data_mutations_breast_cancer.gene, data_mutations_breast_cancer.transcript_id, data_clinical_breast_cancer.cancer_type  		from data_clinical_breast_cancer
+	join data_mutations_breast_cancer on data_mutations_breast_cancer.tumor_sample_barcode = data_clinical_breast_cancer.sample_id
+
+union
+
+select data_clinical_leukemia.sample_id, data_clinical_leukemia.patient_id, data_mutations_leukemia.hugo_symbol, data_mutations_leukemia.gene, data_mutations_leukemia.transcript_id, data_clinical_leukemia.cancer_type  			from data_clinical_leukemia
+	join data_mutations_leukemia on data_mutations_leukemia.tumor_sample_barcode = data_clinical_leukemia.sample_id
+
+union
+
+select data_clinical_prostate.sample_id, data_clinical_prostate.patient_id, data_mutations_prostate.hugo_symbol, data_mutations_prostate.gene, data_mutations_prostate.transcript_id, data_clinical_prostate.cancer_type  			from data_clinical_prostate
+	join data_mutations_prostate on data_mutations_prostate.tumor_sample_barcode = data_clinical_prostate.sample_id;
+
+
+/* example queries */
+
+mysql> select * from tcga_master_view where hugo_symbol = 'lims2';
+
+select  sample_id, cancer_type from tcga_master_view where gene = 'ENST00000265843';
+
+
+/* creating tcga_master_table from tcga_master view select into statement */
+
+create table tcga_master_table 
+   select sample_id, patient_id, hugo_symbol, gene, transcript_id, cancer_type
+   from tcga_master_view;
+
+/* example query for mining tcga master table */
+
+select sample_id, cancer_type, hugo_symbol from tcga_master_table where hugo_symbol = "CLN3" or hugo_symbol = "SMOC1" or hugo_symbol = "TP53" order by hugo_symbol asc;
+
+select * from tcga_master_table
+   group by patient_id 
+   having count(patient_id) > 50 and
+   count(hugo_symbol) > 15;
+
+/* Joining genetpm1 table from GTex to TCGA_Master_table */
+
+select tcga_master_table.gene as gene_tcga, tcga_master_table.hugo_symbol as tcga_gene_name, tcga_master_table.cancer_type, genetpm1.GID as gene_GTEx, genetpm1.NAME as gene_name_GTEx from tcga_master_table join genetpm1 on genetpm1.NAME = tcga_master_table.hugo_symbol;
+
+
+/* joining fields on a substring match */
+
+select SubjectPhenoTypeDS.subjid, SampleAttributeDS.sampid from SubjectPhenoTypeDS join SampleAttributeDS on substr(SampleAttributeDS.sampid, 1, 10)  = SubjectPhenoTypeDS.subjid;
+
+create or replace view gtex_master_view as
+    select SampleAttributeDS.sampid, SampleAttributeDS.smts, SubjectPhenoTypeDS.sex, SubjectPhenoTypeDS.age, SubjectPhenoTypeDS.DTHRDY
+    from SampleAttributeDS
+    join SubjectPhenoTypeDS on SubjectPhenoTypeDS.subjid = substr(SampleAttributeDS.sampid, 1, length(SubjectPhenoTypeDS.subjid));
+
+
+mysql -h expressiondb.cosheh3pc1ze.us-east-2.rds.amazonaws.com --ssl-ca=rds-combined-ca-bundle.pem --ssl-verify-server-cert
