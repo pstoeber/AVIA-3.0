@@ -1,0 +1,60 @@
+/* creating backup .sql file to zip and move to EC2 */
+
+sudo mysqldump -u root -p TCGA > ~/Documents/BTMN\ 670/TCGA_dump.sql
+
+/* zipping the .sql file */
+
+gzip ~/Documents/BTMN\ 670/TCGA_dump.sql
+
+/* connecting and moving TCGA_dump.sql.gz to EC2 instance — saves to root*/
+
+scp -i ~/Downloads/ExpressionDB.pem ~/Documents/BTMN\ 670/TCGA_dumpV5.sql.gz ec2-user@ec2-13-59-26-95.us-east-2.compute.amazonaws.com:
+
+/* connecting to ec2 through ssh */
+
+ssh -i ~/Downloads/ExpressionDB.pem ec2-user@ec2-13-59-26-95.us-east-2.compute.amazonaws.com
+
+/* installing mysql on EC2 instance */
+
+/* going to root of ec2 virtual machine */
+sudo su 
+
+sudo yum install -y httpd24 php70 mysql56-server php70-mysqlnd
+
+sudo service httpd start /* starting install */
+
+sudo chkconfig httpd on /* checking configuration */
+
+chkconfig --list httpd
+
+/* unzipping the gzip file on EC2 */
+
+gzip TCGA_dump.sql.gz -d
+
+
+/* cleaning SQL Dump file of tags prior to import to RDS from EC2 */
+
+sed -E 's/DEFINER=`[^`]+`@`[^`]+`/DEFINER=CURRENT_USER/g' TCGA_dump.sql > TCGA_dump_clean.sql
+
+/* copying database from EC2 instance to RDS instance - “ExpressionDB” is db name in RDS configuration */
+
+mysql -u pstoeber -p -h expressiondb.cosheh3pc1ze.us-east-2.rds.amazonaws.com ExpressionDB < TCGA_dump_clean.sql
+
+*/ connecting to mysql RDS instance on AWS */
+
+mysql -h expressiondb.cosheh3pc1ze.us-east-2.rds.amazonaws.com -P 3306 -u pstoeber -p
+
+/* granting access to users in MySQL */
+
+CREATE USER 'pcrowe'@'%' IDENTIFIED BY 'Pam';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, PROCESS, REFERENCES, INDEX, ALTER, SHOW DATABASES, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER ON *.* TO 'pcrowe'@'%' WITH GRANT OPTION;
+
+CREATE USER 'kvogel'@'%' IDENTIFIED BY 'Kevin';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, PROCESS, REFERENCES, INDEX, ALTER, SHOW DATABASES, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER ON *.* TO 'kvogel'@'%' WITH GRANT OPTION;
+
+CREATE USER 'jumana'@'%' IDENTIFIED BY 'Jose';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, PROCESS, REFERENCES, INDEX, ALTER, SHOW DATABASES, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER ON *.* TO 'jumana'@'%' WITH GRANT OPTION;
+
